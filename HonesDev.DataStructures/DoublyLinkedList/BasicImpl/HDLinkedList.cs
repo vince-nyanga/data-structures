@@ -1,6 +1,6 @@
-namespace DataStructures.LinkedList.Models
+﻿namespace HonesDev.DataStructures.DoublyLinkedList.BasicImpl
 {
-    public class LinkedList<T>
+    public class HDLinkedList<T>
     {
         private int _count;
         private Node<T> _head;
@@ -12,7 +12,8 @@ namespace DataStructures.LinkedList.Models
         public void AddFirst(T data)
         {
             _count++;
-            var newNode = new Node<T>(data);
+            Node<T> newNode = new(){ Value = data };
+
             if (_head is null)
             {
                 _head = newNode;
@@ -27,7 +28,8 @@ namespace DataStructures.LinkedList.Models
         public void AddLast(T data)
         {
             _count++;
-            var newNode = new Node<T>(data);
+            Node<T> newNode = new(){Value = data};
+
             if (_head is null)
             {
                 _head = newNode;
@@ -39,4 +41,12 @@ namespace DataStructures.LinkedList.Models
             _tail = newNode;
         }
     }
+
+    public record Node<T>
+    {
+        public T Value { get; init; }
+        public Node<T> Previous { get; set; }
+        public Node<T> Next { get; set; }
+    }
 }
+    

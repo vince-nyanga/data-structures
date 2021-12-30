@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="DoublyLinkedList\" />
+    <None Remove="DoublyLinkedList\BasicImpl\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="DoublyLinkedList\" />
+    <Folder Include="DoublyLinkedList\BasicImpl\" />
+  </ItemGroup>
+</Project>

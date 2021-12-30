@@ -20,6 +20,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\DataStructures.LinkedList\DataStructures.LinkedList.csproj" />
+    <ProjectReference Include="..\HonesDev.DataStructures\HonesDev.DataStructures.csproj" />
   </ItemGroup>
 </Project>
