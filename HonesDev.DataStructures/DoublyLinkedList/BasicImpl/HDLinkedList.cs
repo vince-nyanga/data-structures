@@ -1,4 +1,6 @@
-﻿namespace HonesDev.DataStructures.DoublyLinkedList.BasicImpl
+﻿using System;
+
+namespace HonesDev.DataStructures.DoublyLinkedList.BasicImpl
 {
     public class HDLinkedList<T>
     {
@@ -39,6 +41,39 @@
             _tail.Next = newNode;
             newNode.Previous = _tail;
             _tail = newNode;
+        }
+
+        public Node<T> FindFirst(T value)
+        {
+            var node = _head;
+            while (node != null)
+            {
+                if (node.Value.Equals(value))
+                {
+                    break;
+                }
+
+                node = node.Next;
+            }
+
+            return node;
+        }
+
+        public Node<T> FindLast(T value)
+        {
+            var node = _head;
+            Node<T> result = null;
+            while (node != null)
+            {
+                if (node.Value.Equals(value))
+                {
+                    result = node;
+                }
+
+                node = node.Next;
+            }
+
+            return result;
         }
     }
 

@@ -90,6 +90,134 @@ namespace HonesDev.DataStructures.UnitTests
             Assert.Equal(2, sut.First.Value);
         }
 
+        [Fact]
+        public void FindFirst_IfEmpty_ShouldReturnNull()
+        {
+            HDLinkedList<int> sut = new();
 
+            var result = sut.FindFirst(1);
+
+            Assert.Null(result);
+        }
+
+        [Fact]
+        public void FindFirst_IfHeadContainsValue_ShouldReturnFirstNode()
+        {
+
+            HDLinkedList<int> sut = new();
+            sut.AddFirst(1);
+            sut.AddLast(2);
+            sut.AddLast(1);
+
+            var result = sut.FindFirst(1);
+
+            Assert.Equal(sut.First, result);
+        }
+
+        [Fact]
+        public void FindFirst_IfTailContainsValue_ShouldReturnLastNode()
+        {
+
+            HDLinkedList<int> sut = new();
+            sut.AddFirst(2);
+            sut.AddLast(2);
+            sut.AddLast(1);
+
+            var result = sut.FindFirst(1);
+
+            Assert.Equal(sut.Last, result);
+        }
+
+        [Fact]
+        public void FindFirst_ShouldReturnNode()
+        {
+            HDLinkedList<int> sut = new();
+            sut.AddFirst(3);
+            sut.AddLast(2);
+            sut.AddLast(1);
+            sut.AddLast(5);
+
+            var result = sut.FindFirst(1);
+
+            Assert.NotNull(result);
+        }
+
+        [Fact]
+        public void FindFirst_InNoMatch_ShouldReturnNull()
+        {
+            HDLinkedList<int> sut = new();
+            sut.AddFirst(3);
+            sut.AddLast(2);
+            sut.AddLast(8);
+            sut.AddLast(5);
+
+            var result = sut.FindFirst(1);
+
+            Assert.Null(result);
+        }
+
+        [Fact]
+        public void FindLast_IfEmpty_ShouldReturnNull()
+        {
+            HDLinkedList<int> sut = new();
+
+            var result = sut.FindLast(1);
+
+            Assert.Null(result);
+        }
+
+        [Fact]
+        public void FindLast_IfHeadContainsValue_ShouldReturnFirstNode()
+        {
+
+            HDLinkedList<int> sut = new();
+            sut.AddFirst(1);
+
+            var result = sut.FindLast(1);
+
+            Assert.Equal(sut.First, result);
+        }
+
+        [Fact]
+        public void FindLast_IfTailContainsValue_ShouldReturnLastNode()
+        {
+
+            HDLinkedList<int> sut = new();
+            sut.AddFirst(1);
+            sut.AddLast(2);
+            sut.AddLast(1);
+
+            var result = sut.FindLast(1);
+
+            Assert.Equal(sut.Last, result);
+        }
+
+        [Fact]
+        public void FindLast_ShouldReturnNode()
+        {
+            HDLinkedList<int> sut = new();
+            sut.AddFirst(3);
+            sut.AddLast(2);
+            sut.AddLast(1);
+            sut.AddLast(5);
+
+            var result = sut.FindLast(1);
+
+            Assert.NotNull(result);
+        }
+
+        [Fact]
+        public void FindLast_InNoMatch_ShouldReturnNull()
+        {
+            HDLinkedList<int> sut = new();
+            sut.AddFirst(3);
+            sut.AddLast(2);
+            sut.AddLast(8);
+            sut.AddLast(5);
+
+            var result = sut.FindLast(1);
+
+            Assert.Null(result);
+        }
     }
 }
