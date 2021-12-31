@@ -75,6 +75,26 @@ namespace HonesDev.DataStructures.DoublyLinkedList.BasicImpl
 
             return result;
         }
+
+        public void ListItems()
+        {
+            var node = _head;
+            while(node != null)
+            {
+                Console.WriteLine(node.Value);
+                node = node.Next;
+            }
+        }
+
+        public void ListItemsReverse()
+        {
+            var node = _tail;
+            while (node != null)
+            {
+                Console.WriteLine(node.Value);
+                node = node.Previous;
+            }
+        }
     }
 
     public record Node<T>
