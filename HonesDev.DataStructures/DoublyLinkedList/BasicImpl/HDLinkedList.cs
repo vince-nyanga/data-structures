@@ -61,19 +61,18 @@ namespace HonesDev.DataStructures.DoublyLinkedList.BasicImpl
 
         public Node<T> FindLast(T value)
         {
-            var node = _head;
-            Node<T> result = null;
+            var node = _tail;
             while (node != null)
             {
                 if (node.Value.Equals(value))
                 {
-                    result = node;
+                    break;
                 }
 
-                node = node.Next;
+                node = node.Previous;
             }
 
-            return result;
+            return node;
         }
 
         public void ListItems()
