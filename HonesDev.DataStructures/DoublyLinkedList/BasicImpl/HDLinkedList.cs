@@ -95,6 +95,44 @@ namespace HonesDev.DataStructures.DoublyLinkedList.BasicImpl
                 node = node.Previous;
             }
         }
+
+        public void AddBefore(Node<T> currentNode, T value)
+        {
+            if (currentNode is null)
+            {
+                throw new ArgumentNullException(nameof(currentNode));
+            }
+            _count++;
+            Node<T> newNode = new() { Value = value };
+            var temp = currentNode;
+            newNode.Next = currentNode;
+            newNode.Previous = temp.Previous;
+            currentNode.Previous = newNode;
+
+            if (newNode.Previous is null)
+            {
+                _head = newNode;
+            }
+        }
+
+        public void AddAfter(Node<T> currentNode, T value)
+        {
+            if (currentNode is null)
+            {
+                throw new ArgumentNullException(nameof(currentNode));
+            }
+            _count++;
+            Node<T> newNode = new() { Value = value };
+            var temp = currentNode;
+            newNode.Previous = currentNode;
+            newNode.Next = temp.Next;
+            currentNode.Next = newNode;
+
+            if (newNode.Next is null)
+            {
+                _tail = newNode;
+            }
+        }
     }
 
     public record Node<T>
