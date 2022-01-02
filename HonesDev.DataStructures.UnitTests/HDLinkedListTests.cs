@@ -355,5 +355,55 @@ namespace HonesDev.DataStructures.UnitTests
 
             Assert.Throws<ArgumentNullException>(action);
         }
+
+        [Fact]
+        public void InsertSorted_ShouldIncrementCount()
+        {
+            HDLinkedList<int> sut = new();
+
+            sut.InsertSorted(1);
+
+            Assert.Equal(1, sut.Count);
+        }
+
+        [Fact]
+        public void InsertSorted_ValueLessThanHead_ShouldSetHead()
+        {
+            HDLinkedList<int> sut = new();
+            sut.AddFirst(2);
+
+            sut.InsertSorted(1);
+
+            Assert.Equal(1, sut.First.Value);
+            Assert.Equal(2, sut.First.Next.Value);
+        }
+
+        [Fact]
+        public void InsertSorted_IfValueInMiddle_ShouldKeepListSorted()
+        {
+            HDLinkedList<int> sut = new();
+            sut.AddFirst(1);
+            sut.AddLast(3);
+            var expectedResult = "1 2 3";
+
+            sut.InsertSorted(2);
+            var result = sut.ToString();
+
+            Assert.Equal(expectedResult, result);
+        }
+
+        [Fact]
+        public void InsertSorted_IfValueGreaterThanAll_ShouldKeepListSorted()
+        {
+            HDLinkedList<int> sut = new();
+            sut.AddFirst(1);
+            sut.AddLast(2);
+            var expectedResult = "1 2 3";
+
+            sut.InsertSorted(3);
+            var result = sut.ToString();
+
+            Assert.Equal(expectedResult, result);
+        }
     }
 }

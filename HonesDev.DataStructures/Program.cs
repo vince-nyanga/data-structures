@@ -2,10 +2,9 @@
 using HonesDev.DataStructures.DoublyLinkedList.BasicImpl;
 
 HDLinkedList<int> linkedList = new();
-for (var i = 1; i < 11; i++)
-{
-    linkedList.AddLast(i);
-}
+linkedList.AddFirst(1);
+linkedList.AddLast(3);
+linkedList.InsertSorted(2);
 
 Console.WriteLine("List");
 linkedList.ListItems();
