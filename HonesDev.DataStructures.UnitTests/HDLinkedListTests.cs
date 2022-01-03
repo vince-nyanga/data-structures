@@ -405,5 +405,57 @@ namespace HonesDev.DataStructures.UnitTests
 
             Assert.Equal(expectedResult, result);
         }
+
+        [Fact]
+        public void Reverse_IfSingleNode_ShouldDoNothing()
+        {
+            HDLinkedList<int> sut = new();
+            sut.AddFirst(1);
+
+            sut.Reverse();
+
+            Assert.Equal(1, sut.First.Value);
+        }
+
+        [Fact]
+        public void Reserve_ShouldUpdateHead()
+        {
+            HDLinkedList<int> sut = new();
+            sut.AddFirst(1);
+            sut.AddLast(2);
+            sut.AddLast(3);
+
+            sut.Reverse();
+
+            Assert.Equal(3, sut.First.Value);
+        }
+
+        [Fact]
+        public void Reserve_ShouldUpdateTail()
+        {
+            HDLinkedList<int> sut = new();
+            sut.AddFirst(1);
+            sut.AddLast(2);
+            sut.AddLast(3);
+
+            sut.Reverse();
+
+            Assert.Equal(1, sut.Last.Value);
+        }
+
+        [Fact]
+        public void Reserve_ShouldReverseList()
+        {
+            HDLinkedList<int> sut = new();
+            sut.AddFirst(1);
+            sut.AddLast(2);
+            sut.AddLast(3);
+            var expectedResult = "3 2 1";
+
+            sut.Reverse();
+            var result = sut.ToString();
+
+            Assert.Equal(expectedResult, result);
+        }
     }
 }

@@ -174,6 +174,26 @@ namespace HonesDev.DataStructures.DoublyLinkedList.BasicImpl
             }
             return stringBuilder.ToString().Trim();
         }
+
+        public void Reverse()
+        {
+           if (_count > 1)
+            {
+                Node<T> temp = null;
+                Node<T> current = _head;
+                _tail = _head;
+
+                while(current != null)
+                {
+                    temp = current.Previous;
+                    current.Previous = current.Next;
+                    current.Next = temp;
+                    current = current.Previous;
+                }
+
+                _head = temp.Previous;
+            }
+        }
     }
 
     public record Node<T>
