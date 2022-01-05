@@ -457,5 +457,55 @@ namespace HonesDev.DataStructures.UnitTests
 
             Assert.Equal(expectedResult, result);
         }
+
+        [Fact]
+        public void RemoveDuplicates_ShouldRemoveDuplicateItems()
+        {
+            HDLinkedList<int> sut = new();
+            sut.AddFirst(1);
+            sut.AddLast(2);
+            sut.AddLast(3);
+            sut.AddLast(1);
+            sut.AddLast(4);
+            sut.AddLast(3);
+            var expectedResult = "1 2 3 4";
+
+            sut.RemoveDuplicates();
+            var result = sut.ToString();
+
+            Assert.Equal(expectedResult, result);
+        }
+
+        [Fact]
+        public void RemoveDuplicates_ShouldHaveCorrectHead()
+        {
+            HDLinkedList<int> sut = new();
+            sut.AddFirst(1);
+            sut.AddLast(2);
+            sut.AddLast(3);
+            sut.AddLast(1);
+            sut.AddLast(4);
+            sut.AddLast(3);
+
+            sut.RemoveDuplicates();
+
+            Assert.Equal(1, sut.First.Value);
+        }
+
+        [Fact]
+        public void RemoveDuplicates_ShouldHaveCorrectTail()
+        {
+            HDLinkedList<int> sut = new();
+            sut.AddFirst(1);
+            sut.AddLast(2);
+            sut.AddLast(3);
+            sut.AddLast(1);
+            sut.AddLast(4);
+            sut.AddLast(3);
+
+            sut.RemoveDuplicates();
+
+            Assert.Equal(4, sut.Last.Value);
+        }
     }
 }

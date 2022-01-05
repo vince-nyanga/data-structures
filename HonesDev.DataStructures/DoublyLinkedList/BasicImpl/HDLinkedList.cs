@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Text;
 
 namespace HonesDev.DataStructures.DoublyLinkedList.BasicImpl
@@ -192,6 +193,36 @@ namespace HonesDev.DataStructures.DoublyLinkedList.BasicImpl
                 }
 
                 _head = temp.Previous;
+            }
+        }
+
+        public void RemoveDuplicates()
+        {
+            Dictionary<T, bool> visitedList = new();
+            var current = _head;
+            while(current != null)
+            {
+                if (visitedList.ContainsKey(current.Value))
+                {
+                    if (current.Previous != null)
+                    {
+                        current.Previous.Next = current.Next;
+                        if (current.Next is null)
+                        {
+                            _tail = current.Previous;
+                        }
+                    }
+                    if (current.Next != null)
+                    {
+                        current.Next.Previous = current.Previous;
+                    }
+                }
+                else
+                {
+                    visitedList.Add(current.Value, true);
+                }
+
+                current = current.Next;
             }
         }
     }
