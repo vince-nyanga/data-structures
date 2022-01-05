@@ -507,5 +507,21 @@ namespace HonesDev.DataStructures.UnitTests
 
             Assert.Equal(4, sut.Last.Value);
         }
+
+        [Fact]
+        public void RemoveDuplicates_ShouldUpdateCount()
+        {
+            HDLinkedList<int> sut = new();
+            sut.AddFirst(1);
+            sut.AddLast(2);
+            sut.AddLast(3);
+            sut.AddLast(1);
+            sut.AddLast(4);
+            sut.AddLast(3);
+
+            sut.RemoveDuplicates();
+
+            Assert.Equal(4, sut.Count);
+        }
     }
 }

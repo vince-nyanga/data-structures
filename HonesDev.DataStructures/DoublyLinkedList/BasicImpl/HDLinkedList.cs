@@ -206,6 +206,7 @@ namespace HonesDev.DataStructures.DoublyLinkedList.BasicImpl
                 {
                     if (current.Previous != null)
                     {
+                        _count--;
                         current.Previous.Next = current.Next;
                         if (current.Next is null)
                         {
