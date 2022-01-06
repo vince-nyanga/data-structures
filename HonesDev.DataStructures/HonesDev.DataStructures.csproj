@@ -8,9 +8,11 @@
   <ItemGroup>
     <None Remove="DoublyLinkedList\" />
     <None Remove="DoublyLinkedList\BasicImpl\" />
+    <None Remove="BinaryTree\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DoublyLinkedList\" />
     <Folder Include="DoublyLinkedList\BasicImpl\" />
+    <Folder Include="BinaryTree\" />
   </ItemGroup>
 </Project>
