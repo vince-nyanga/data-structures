@@ -41,6 +41,32 @@ namespace HonesDev.DataStructures.BinaryTree
                 parent.Right = newNode;
             }
         }
+
+        public TreeNode<T> Search(T value)
+        {
+            return FindNode(_root, value);
+        }
+
+
+        private TreeNode<T> FindNode(TreeNode<T> node, T value)
+        {
+            if (node is null)
+            {
+                return null;
+            }
+
+            if (value.CompareTo(node.Value) == 0)
+            {
+                return node;
+            }
+
+            if (value.CompareTo(node.Value)< 0)
+            {
+                return FindNode(node.Left, value);
+            }
+
+            return FindNode(node.Right, value);
+        }
     }
 
     public record TreeNode<T>
