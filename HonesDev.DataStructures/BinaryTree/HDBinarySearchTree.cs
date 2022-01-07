@@ -47,5 +47,7 @@ namespace HonesDev.DataStructures.BinaryTree
         public T Value { get; init; }
         public TreeNode<T> Left { get; set; }
         public TreeNode<T> Right { get; set; }
+
+        public override string ToString() => $"{Value} ";
     }
 }
