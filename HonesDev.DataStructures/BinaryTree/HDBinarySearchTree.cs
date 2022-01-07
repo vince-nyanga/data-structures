@@ -8,16 +8,17 @@ namespace HonesDev.DataStructures.BinaryTree
 
         public void Insert(T value)
         {
+            TreeNode<T> newNode = new() { Value = value };
+
             if (_root is null)
             {
-                _root = new() { Value = value };
+                _root = newNode;
                 return;
             }
 
             TreeNode<T> node = _root;
             TreeNode<T> parent = null;
-            TreeNode<T> newNode = new() { Value = value };
-
+          
             while (node != null)
             {
                 parent = node;
