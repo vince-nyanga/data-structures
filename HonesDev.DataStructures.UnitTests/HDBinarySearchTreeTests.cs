@@ -85,10 +85,12 @@ namespace HonesDev.DataStructures.UnitTests
             HDBinarySearchTree<int> sut = new();
             sut.Insert(4);
             sut.Insert(2);
-            sut.Insert(8);
             sut.Insert(6);
+            sut.Insert(1);
             sut.Insert(3);
-            var expectedResult = "2 3 4 6 8";
+            sut.Insert(5);
+            sut.Insert(7);
+            var expectedResult = "1 2 3 4 5 6 7";
             StringBuilder stringBuilder = new();
 
             sut.InOrderTraversal(sut.Root, stringBuilder);
@@ -102,10 +104,12 @@ namespace HonesDev.DataStructures.UnitTests
             HDBinarySearchTree<int> sut = new();
             sut.Insert(4);
             sut.Insert(2);
-            sut.Insert(8);
             sut.Insert(6);
+            sut.Insert(1);
             sut.Insert(3);
-            var expectedResult = "4 2 3 8 6";
+            sut.Insert(5);
+            sut.Insert(7);
+            var expectedResult = "4 2 1 3 6 5 7";
             StringBuilder stringBuilder = new();
 
             sut.PreOrderTraversal(sut.Root, stringBuilder);
@@ -119,10 +123,12 @@ namespace HonesDev.DataStructures.UnitTests
             HDBinarySearchTree<int> sut = new();
             sut.Insert(4);
             sut.Insert(2);
-            sut.Insert(8);
             sut.Insert(6);
+            sut.Insert(1);
             sut.Insert(3);
-            var expectedResult = "3 2 6 8 4";
+            sut.Insert(5);
+            sut.Insert(7);
+            var expectedResult = "1 3 2 5 7 6 4";
             StringBuilder stringBuilder = new();
 
             sut.PostOrderTraversal(sut.Root, stringBuilder);
