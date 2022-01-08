@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Text;
+
 namespace HonesDev.DataStructures.BinaryTree
 {
     public class HDBinarySearchTree<T> where T : IComparable
@@ -66,6 +68,49 @@ namespace HonesDev.DataStructures.BinaryTree
             }
 
             return FindNode(node.Right, value);
+        }
+
+        public void InOrderTraversal(TreeNode<T> node, StringBuilder stringBuilder)
+        {
+            if (node is null)
+            {
+                return;
+            }
+
+            InOrderTraversal(node.Left, stringBuilder);
+
+            // visit node
+            stringBuilder.Append(node.ToString());
+
+            InOrderTraversal(node.Right, stringBuilder);
+        }
+
+        public void PreOrderTraversal(TreeNode<T> node, StringBuilder stringBuilder)
+        {
+            if (node is null)
+            {
+                return;
+            }
+
+            // visit node
+            stringBuilder.Append(node.ToString());
+            PreOrderTraversal(node.Left, stringBuilder);
+            PreOrderTraversal(node.Right, stringBuilder);
+        }
+
+        public void PostOrderTraversal(TreeNode<T> node, StringBuilder stringBuilder)
+        {
+            if (node is null)
+            {
+                return;
+            }
+
+            PostOrderTraversal(node.Left, stringBuilder);
+
+            PostOrderTraversal(node.Right, stringBuilder);
+
+            // visit node
+            stringBuilder.Append(node.ToString());
         }
     }
 

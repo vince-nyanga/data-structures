@@ -523,6 +523,5 @@ namespace HonesDev.DataStructures.UnitTests
 
             Assert.Equal(4, sut.Count);
         }
-
     }
 }

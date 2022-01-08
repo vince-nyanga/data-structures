@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 using HonesDev.DataStructures.BinaryTree;
 using Xunit;
 
@@ -76,6 +77,57 @@ namespace HonesDev.DataStructures.UnitTests
             var node = sut.Search(10);
 
             Assert.Null(node);
+        }
+
+        [Fact]
+        public void InOrderTraversal_ShouldListsItemsInOrder()
+        {
+            HDBinarySearchTree<int> sut = new();
+            sut.Insert(4);
+            sut.Insert(2);
+            sut.Insert(8);
+            sut.Insert(6);
+            sut.Insert(3);
+            var expectedResult = "2 3 4 6 8";
+            StringBuilder stringBuilder = new();
+
+            sut.InOrderTraversal(sut.Root, stringBuilder);
+
+            Assert.Equal(expectedResult, stringBuilder.ToString().Trim());
+        }
+
+        [Fact]
+        public void PreOrderTraversal_ShouldListsItemsPreOrder()
+        {
+            HDBinarySearchTree<int> sut = new();
+            sut.Insert(4);
+            sut.Insert(2);
+            sut.Insert(8);
+            sut.Insert(6);
+            sut.Insert(3);
+            var expectedResult = "4 2 3 8 6";
+            StringBuilder stringBuilder = new();
+
+            sut.PreOrderTraversal(sut.Root, stringBuilder);
+
+            Assert.Equal(expectedResult, stringBuilder.ToString().Trim());
+        }
+
+        [Fact]
+        public void PostOrderTraversal_ShouldListsItemsPostOrder()
+        {
+            HDBinarySearchTree<int> sut = new();
+            sut.Insert(4);
+            sut.Insert(2);
+            sut.Insert(8);
+            sut.Insert(6);
+            sut.Insert(3);
+            var expectedResult = "3 2 6 8 4";
+            StringBuilder stringBuilder = new();
+
+            sut.PostOrderTraversal(sut.Root, stringBuilder);
+
+            Assert.Equal(expectedResult, stringBuilder.ToString().Trim());
         }
 
     }
