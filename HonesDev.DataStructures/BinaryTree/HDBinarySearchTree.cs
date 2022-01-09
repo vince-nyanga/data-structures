@@ -112,6 +112,42 @@ namespace HonesDev.DataStructures.BinaryTree
             // visit node
             stringBuilder.Append(node.ToString());
         }
+
+        public bool IsBalanced()
+        {
+            return GetTreeHeight(_root) != int.MinValue;
+        }
+
+        private int GetTreeHeight(TreeNode<T> node)
+        {
+            if (node is null)
+            {
+                return -1;
+            }
+
+            var leftHeight = GetTreeHeight(node.Left);
+            if (leftHeight == int.MinValue)
+            {
+                return int.MinValue;
+            }
+
+            var rightHeight = GetTreeHeight(node.Right);
+            if (rightHeight == int.MinValue)
+            {
+                return int.MinValue;
+            }
+
+            if (Math.Abs(leftHeight - rightHeight) > 1)
+            {
+                return int.MinValue;
+            }
+            else
+            {
+                return Math.Max(leftHeight, rightHeight) + 1;
+            }
+        }
+
+     
     }
 
     public record TreeNode<T>

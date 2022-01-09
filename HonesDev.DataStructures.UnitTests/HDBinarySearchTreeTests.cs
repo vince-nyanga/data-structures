@@ -136,5 +136,47 @@ namespace HonesDev.DataStructures.UnitTests
             Assert.Equal(expectedResult, stringBuilder.ToString().Trim());
         }
 
+        [Fact]
+        public void IsBalanced_IfEmpty_ShouldBeTrue()
+        {
+            HDBinarySearchTree<int> sut = new();
+
+            var result = sut.IsBalanced();
+
+            Assert.True(result);
+        }
+
+        [Fact]
+        public void IsBalanced_IfTreeIsBalanced_ShouldReturnTrue()
+        {
+            HDBinarySearchTree<int> sut = new();
+            sut.Insert(4);
+            sut.Insert(2);
+            sut.Insert(6);
+            sut.Insert(1);
+            sut.Insert(3);
+            sut.Insert(5);
+            sut.Insert(7);
+
+            var result = sut.IsBalanced();
+
+            Assert.True(result);
+        }
+
+        [Fact]
+        public void IsBalanced_IfTreeIsSkewed_ShouldReturnFalse()
+        {
+            HDBinarySearchTree<int> sut = new();
+            sut.Insert(4);
+            sut.Insert(2);
+            sut.Insert(10);
+            sut.Insert(5);
+            sut.Insert(7);
+            sut.Insert(8);
+
+            var result = sut.IsBalanced();
+
+            Assert.False(result);
+        }
     }
 }
