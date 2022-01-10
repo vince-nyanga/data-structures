@@ -178,5 +178,45 @@ namespace HonesDev.DataStructures.UnitTests
 
             Assert.False(result);
         }
+
+        [Fact]
+        public void GetLowestCommonAncestor_IfEmpty_ShouldReturnNull()
+        {
+            HDBinarySearchTree<int> sut = new();
+
+            var node = sut.GetLowestCommonAncestor(5,3);
+
+            Assert.Null(node);
+        }
+
+        [Fact]
+        public void GetLowestCommonAncestor_IfExists_ShouldReturnNode()
+        {
+            HDBinarySearchTree<int> sut = new();
+            sut.Insert(4);
+            sut.Insert(2);
+            sut.Insert(6);
+            sut.Insert(1);
+            sut.Insert(3);
+
+            var node = sut.GetLowestCommonAncestor(1, 3);
+
+            Assert.Equal(2, node.Value);
+        }
+
+        [Fact]
+        public void GetLowestCommonAncestor_OwnDescendant_ShouldReturnNode()
+        {
+            HDBinarySearchTree<int> sut = new();
+            sut.Insert(4);
+            sut.Insert(2);
+            sut.Insert(6);
+            sut.Insert(1);
+            sut.Insert(3);
+
+            var node = sut.GetLowestCommonAncestor(1, 2);
+
+            Assert.Equal(2, node.Value);
+        }
     }
 }

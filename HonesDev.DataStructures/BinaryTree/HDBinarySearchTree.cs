@@ -147,7 +147,26 @@ namespace HonesDev.DataStructures.BinaryTree
             }
         }
 
-     
+        public TreeNode<T> GetLowestCommonAncestor(T first, T second)
+        {
+            var node = _root;
+            while(node != null)
+            {
+                if (node.Value.CompareTo(first) > 0 && node.Value.CompareTo(second) > 0)
+                {
+                    node = node.Left;
+                }
+                else if (node.Value.CompareTo(first) < 0 && node.Value.CompareTo(second) < 0)
+                {
+                    node = node.Right;
+                }
+                else
+                {
+                    break;
+                }
+            }
+            return node;
+        }
     }
 
     public record TreeNode<T>
