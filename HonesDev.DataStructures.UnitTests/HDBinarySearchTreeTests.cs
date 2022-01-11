@@ -218,5 +218,42 @@ namespace HonesDev.DataStructures.UnitTests
 
             Assert.Equal(2, node.Value);
         }
+
+        [Fact]
+        public void GetKthSmallestNode_IfEmpty_ShouldReturnNull()
+        {
+            HDBinarySearchTree<int> sut = new();
+
+            var node = sut.GetKthSmallestNode(1);
+
+            Assert.Null(node);
+        }
+
+        [Fact]
+        public void GetKthSmallestNode_IfNotExist_ShouldReturnNull()
+        {
+            HDBinarySearchTree<int> sut = new();
+            sut.Insert(1);
+
+            var node = sut.GetKthSmallestNode(2);
+
+            Assert.Null(node);
+        }
+
+        [Fact]
+        public void GetKthSmallestNode_IfExists_ShouldReturnNode()
+        {
+            HDBinarySearchTree<int> sut = new();
+            sut.Insert(5);
+            sut.Insert(6);
+            sut.Insert(3);
+            sut.Insert(4);
+            sut.Insert(2);
+            sut.Insert(1);
+
+            var node = sut.GetKthSmallestNode(3);
+
+            Assert.Equal(3, node.Value);
+        }
     }
 }

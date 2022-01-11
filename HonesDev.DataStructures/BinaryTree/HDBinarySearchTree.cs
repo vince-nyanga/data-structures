@@ -7,6 +7,7 @@ namespace HonesDev.DataStructures.BinaryTree
     {
         private TreeNode<T> _root;
         public TreeNode<T> Root { get => _root; }
+        private int _count;
 
         public void Insert(T value)
         {
@@ -167,6 +168,36 @@ namespace HonesDev.DataStructures.BinaryTree
             }
             return node;
         }
+
+        public TreeNode<T> GetKthSmallestNode(int k)
+        {
+            _count = 0;
+            return FindKthSmallest(_root, k);
+        }
+
+        private TreeNode<T> FindKthSmallest(TreeNode<T> node, int k)
+        {
+            if (node is null)
+            {
+                return null;
+            }
+
+            var left = FindKthSmallest(node.Left, k);
+
+            if (left != null)
+            {
+                return left;
+            }
+
+            _count++;
+
+            if(_count == k)
+            {
+                return node;
+            }
+
+            return FindKthSmallest(node.Right, k);
+;        }
     }
 
     public record TreeNode<T>
