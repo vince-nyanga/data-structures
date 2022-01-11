@@ -255,5 +255,54 @@ namespace HonesDev.DataStructures.UnitTests
 
             Assert.Equal(3, node.Value);
         }
+
+        [Fact]
+        public void Delete_IfEmpty_ShouldReturnNull()
+        {
+            HDBinarySearchTree<int> sut = new();
+
+            var node = sut.Delete(1);
+
+            Assert.Null(node);
+        }
+
+        [Fact]
+        public void Delete_ShouldRemoveNode()
+        {
+            HDBinarySearchTree<int> sut = new();
+            sut.Insert(4);
+            sut.Insert(2);
+            sut.Insert(6);
+            sut.Insert(3);
+            sut.Insert(5);
+            sut.Insert(7);
+            sut.Insert(1);
+
+            sut.Delete(2);
+
+            var expectedResult = "1 3 4 5 6 7";
+            StringBuilder stringBuilder = new();
+
+            sut.InOrderTraversal(sut.Root, stringBuilder);
+
+            Assert.Equal(expectedResult, stringBuilder.ToString().Trim());
+        }
+
+        [Fact]
+        public void Delete_IfRoot_ShouldReplaceWithSmallestOnRight()
+        {
+            HDBinarySearchTree<int> sut = new();
+            sut.Insert(4);
+            sut.Insert(2);
+            sut.Insert(6);
+            sut.Insert(3);
+            sut.Insert(5);
+            sut.Insert(7);
+            sut.Insert(1);
+
+            sut.Delete(4);
+
+            Assert.Equal(5, sut.Root.Value);
+        }
     }
 }

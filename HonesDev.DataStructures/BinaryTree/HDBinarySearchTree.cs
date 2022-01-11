@@ -197,11 +197,67 @@ namespace HonesDev.DataStructures.BinaryTree
 
             return FindKthSmallest(node.Right, k, ref count);
 ;        }
+
+        public TreeNode<T> Delete(T value)
+        {
+            return RemoveNode(_root, value);
+        }
+
+        private TreeNode<T> RemoveNode(TreeNode<T> node, T value)
+        {
+            if (node is null)
+            {
+                return null;
+            }
+
+            if (node.Value.CompareTo(value) > 0)
+            {
+                node.Left = RemoveNode(node.Left, value);
+                return node;
+            }
+
+            if (node.Value.CompareTo(value) < 0)
+            {
+                node.Right = RemoveNode(node.Right, value);
+                return node;
+            }
+
+            if (node.Left is null)
+            {
+                return node.Right;
+            }
+
+            if (node.Right is null)
+            {
+                return node.Left;
+            }
+
+            var parent = node;
+            var successor = node.Right;
+
+            while(successor.Left != null)
+            {
+                parent = successor;
+                successor = successor.Left;
+            }
+
+            if (parent != node)
+            {
+                parent.Left = successor.Right;
+            }
+            else
+            {
+                parent.Right = successor.Right;
+            }
+
+            node.Value = successor.Value;
+            return node;
+        }
     }
 
     public record TreeNode<T>
     {
-        public T Value { get; init; }
+        public T Value { get; set; }
         public TreeNode<T> Left { get; set; }
         public TreeNode<T> Right { get; set; }
 
