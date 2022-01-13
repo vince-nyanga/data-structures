@@ -35,16 +35,64 @@ namespace HonesDev.DataStructures.BinaryHeap
             }
         }
 
+        public void DeleteRoot()
+        {
+            var i = _items.Count - 1;
+            _items[0] = _items[i];
+            _items.RemoveAt(i);
+
+            BubbleDown();
+        }
+
+
+        private void BubbleDown()
+        {
+            var i = 0;
+            while (true)
+            {
+                var leftChildIndex = GetLeftChildIndex(i);
+                var rightChildIndex = GetRightChildIndex(i);
+                var swapIndex = i;
+
+                if (leftChildIndex < _items.Count)
+                {
+                    if (!_comparer.Invoke(_items[swapIndex], _items[leftChildIndex]))
+                    {
+                        swapIndex = leftChildIndex;
+                    }
+                }
+
+                if (rightChildIndex < _items.Count)
+                {
+                    if (!_comparer.Invoke(_items[swapIndex], _items[rightChildIndex]))
+                    {
+                        swapIndex = rightChildIndex;
+                    }
+                }
+
+                if (swapIndex != i)
+                {
+                    Swap(swapIndex, i);
+                    i = swapIndex;
+                }
+                else
+                {
+                    break;
+                }
+            }
+           
+        }
+
         public override string ToString()
         {
             return string.Join(" ", _items);
         }
 
-        private int GetParentIndex(int currentIndex) => (currentIndex - 1) >> 1;
+        private static int GetParentIndex(int currentIndex) => (currentIndex - 1) / 2;
 
-        private int GetLeftChildIndex(int currentIndex) => (currentIndex + 1) << 1;
+        private static int GetLeftChildIndex(int currentIndex) => 2 * currentIndex + 1;
 
-        private int RightChildIndex(int currentIndex) => (currentIndex + 2) << 1;
+        private static int GetRightChildIndex(int currentIndex) => 2 * currentIndex + 2;
 
         private void Swap(int firstIndex, int secondIndex)
         {

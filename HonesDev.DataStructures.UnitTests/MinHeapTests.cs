@@ -42,5 +42,22 @@ namespace HonesDev.DataStructures.UnitTests
 
             Assert.Equal(expectedResult, sut.ToString());
         }
+
+        [Fact]
+        public void DeleteRoot_ShouldRemoveRoot()
+        {
+            HDHeap<int> sut = new(_minHeapComparer);
+            sut.Insert(10);
+            sut.Insert(2);
+            sut.Insert(3);
+            sut.Insert(1);
+            sut.Insert(7);
+            sut.Insert(8);
+            var expectedResult = "2 7 3 10 8";
+
+            sut.DeleteRoot();
+
+            Assert.Equal(expectedResult, sut.ToString());
+        }
     }
 }
