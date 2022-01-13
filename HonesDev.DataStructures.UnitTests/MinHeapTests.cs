@@ -44,7 +44,7 @@ namespace HonesDev.DataStructures.UnitTests
         }
 
         [Fact]
-        public void DeleteRoot_ShouldRemoveRoot()
+        public void Pop_ShouldRemoveRoot()
         {
             HDHeap<int> sut = new(_minHeapComparer);
             sut.Insert(10);
@@ -55,9 +55,10 @@ namespace HonesDev.DataStructures.UnitTests
             sut.Insert(8);
             var expectedResult = "2 7 3 10 8";
 
-            sut.DeleteRoot();
+            var item = sut.Pop();
 
             Assert.Equal(expectedResult, sut.ToString());
+            Assert.Equal(1, item);
         }
     }
 }

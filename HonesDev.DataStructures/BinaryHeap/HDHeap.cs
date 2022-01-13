@@ -19,14 +19,19 @@ namespace HonesDev.DataStructures.BinaryHeap
         public void Insert(T item)
         {
             _items.Add(item);
-            var i = _items.Count - 1;
-            while (i > 0)
+            BubbleUp();
+        }
+
+        private void BubbleUp()
+        {
+            var index = _items.Count - 1;
+            while (index > 0)
             {
-                var parentIndex = GetParentIndex(i);
-                if (_comparer.Invoke(_items[i], _items[parentIndex]))
+                var parentIndex = GetParentIndex(index);
+                if (_comparer.Invoke(_items[index], _items[parentIndex]))
                 {
-                    Swap(i, parentIndex);
-                    i = parentIndex;
+                    Swap(index, parentIndex);
+                    index = parentIndex;
                 }
                 else
                 {
@@ -35,7 +40,30 @@ namespace HonesDev.DataStructures.BinaryHeap
             }
         }
 
-        public void DeleteRoot()
+        public T Peek()
+        {
+            if (_items.Count == 0)
+            {
+                throw new IndexOutOfRangeException();
+            }
+
+            return _items[0];
+           
+        }
+
+        public T Pop()
+        {
+            if (_items.Count == 0)
+            {
+                throw new IndexOutOfRangeException();
+            }
+
+            var item = _items[0];
+            DeleteRoot();
+            return item;
+        }
+
+        private void DeleteRoot()
         {
             var i = _items.Count - 1;
             _items[0] = _items[i];
@@ -47,12 +75,12 @@ namespace HonesDev.DataStructures.BinaryHeap
 
         private void BubbleDown()
         {
-            var i = 0;
-            while (true)
+            var index = 0;
+            while (HasLeftChild(index))
             {
-                var leftChildIndex = GetLeftChildIndex(i);
-                var rightChildIndex = GetRightChildIndex(i);
-                var swapIndex = i;
+                var leftChildIndex = GetLeftChildIndex(index);
+                var rightChildIndex = GetRightChildIndex(index);
+                var swapIndex = index;
 
                 if (leftChildIndex < _items.Count)
                 {
@@ -70,10 +98,10 @@ namespace HonesDev.DataStructures.BinaryHeap
                     }
                 }
 
-                if (swapIndex != i)
+                if (swapIndex != index)
                 {
-                    Swap(swapIndex, i);
-                    i = swapIndex;
+                    Swap(swapIndex, index);
+                    index = swapIndex;
                 }
                 else
                 {
@@ -88,11 +116,13 @@ namespace HonesDev.DataStructures.BinaryHeap
             return string.Join(" ", _items);
         }
 
-        private static int GetParentIndex(int currentIndex) => (currentIndex - 1) / 2;
+        private static int GetParentIndex(int index) => (index - 1) / 2;
 
-        private static int GetLeftChildIndex(int currentIndex) => 2 * currentIndex + 1;
+        private static int GetLeftChildIndex(int index) => 2 * index + 1;
 
-        private static int GetRightChildIndex(int currentIndex) => 2 * currentIndex + 2;
+        private static int GetRightChildIndex(int index) => 2 * index + 2;
+
+        private bool HasLeftChild(int index) => GetLeftChildIndex(index) < _items.Count;
 
         private void Swap(int firstIndex, int secondIndex)
         {
