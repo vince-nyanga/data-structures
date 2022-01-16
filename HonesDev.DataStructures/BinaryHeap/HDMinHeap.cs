@@ -74,7 +74,6 @@ namespace HonesDev.DataStructures.BinaryHeap
 
         private void BubbleDown(int index)
         {
-
             while (HasLeftChild(index))
             {
                 var leftChildIndex = GetLeftChildIndex(index);
