@@ -3,12 +3,12 @@ using System.Collections.Generic;
 
 namespace HonesDev.DataStructures.BinaryHeap
 {
-    public class HDHeap<T>
+    public class HDMinHeap<T>
     {
         private readonly List<T> _items;
-        private readonly Func<T, T, bool> _comparer;
+        private readonly IComparer<T> _comparer;
 
-        public HDHeap(Func<T, T, bool> comparer)
+        public HDMinHeap(IComparer<T> comparer)
         {
             _comparer = comparer;
             _items = new List<T>();
@@ -28,7 +28,7 @@ namespace HonesDev.DataStructures.BinaryHeap
             while (index > 0)
             {
                 var parentIndex = GetParentIndex(index);
-                if (_comparer.Invoke(_items[index], _items[parentIndex]))
+                if (_comparer.Compare(_items[index], _items[parentIndex]) < 0)
                 {
                     Swap(index, parentIndex);
                     index = parentIndex;
@@ -69,33 +69,28 @@ namespace HonesDev.DataStructures.BinaryHeap
             _items[0] = _items[i];
             _items.RemoveAt(i);
 
-            BubbleDown();
+            BubbleDown(0);
         }
 
 
-        private void BubbleDown()
+        private void BubbleDown(int index)
         {
-            var index = 0;
             while (HasLeftChild(index))
             {
                 var leftChildIndex = GetLeftChildIndex(index);
                 var rightChildIndex = GetRightChildIndex(index);
                 var swapIndex = index;
 
-                if (leftChildIndex < _items.Count)
+                if (leftChildIndex < _items.Count &&
+                    _comparer.Compare(_items[swapIndex], _items[leftChildIndex]) > 0)
                 {
-                    if (!_comparer.Invoke(_items[swapIndex], _items[leftChildIndex]))
-                    {
-                        swapIndex = leftChildIndex;
-                    }
+                    swapIndex = leftChildIndex;
                 }
 
-                if (rightChildIndex < _items.Count)
+                if (rightChildIndex < _items.Count &&
+                    _comparer.Compare(_items[swapIndex], _items[rightChildIndex]) > 0)
                 {
-                    if (!_comparer.Invoke(_items[swapIndex], _items[rightChildIndex]))
-                    {
-                        swapIndex = rightChildIndex;
-                    }
+                    swapIndex = rightChildIndex;
                 }
 
                 if (swapIndex != index)

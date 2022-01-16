@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Collections.Generic;
 using HonesDev.DataStructures.BinaryHeap;
 using Xunit;
 
@@ -6,12 +6,12 @@ namespace HonesDev.DataStructures.UnitTests
 {
     public class MinHeapTests
     {
-        private readonly Func<int, int, bool> _minHeapComparer = (a, b) => a < b;
+        private readonly IntComparer _comparer = new ();
 
         [Fact]
         public void Insert_IfEmpty_ShouldSetRoot()
         {
-            HDHeap<int> sut = new(_minHeapComparer);
+            HDMinHeap<int> sut = new(_comparer);
 
             sut.Insert(10);
 
@@ -21,7 +21,7 @@ namespace HonesDev.DataStructures.UnitTests
         [Fact]
         public void Insert_IfValueLessThanRoot_ShouldSwap()
         {
-            HDHeap<int> sut = new(_minHeapComparer);
+            HDMinHeap<int> sut = new(_comparer);
             sut.Insert(10);
           
             sut.Insert(2);
@@ -32,7 +32,7 @@ namespace HonesDev.DataStructures.UnitTests
         [Fact]
         public void Insert_ShouldCreateMinHeap()
         {
-            HDHeap<int> sut = new(_minHeapComparer);
+            HDMinHeap<int> sut = new(_comparer);
             sut.Insert(10);
             sut.Insert(2);
             sut.Insert(3);
@@ -46,7 +46,7 @@ namespace HonesDev.DataStructures.UnitTests
         [Fact]
         public void Pop_ShouldRemoveRoot()
         {
-            HDHeap<int> sut = new(_minHeapComparer);
+            HDMinHeap<int> sut = new(_comparer);
             sut.Insert(10);
             sut.Insert(2);
             sut.Insert(3);
@@ -59,6 +59,14 @@ namespace HonesDev.DataStructures.UnitTests
 
             Assert.Equal(expectedResult, sut.ToString());
             Assert.Equal(1, item);
+        }
+    }
+
+    internal class IntComparer : IComparer<int>
+    {
+        public int Compare(int x, int y)
+        {
+            return x - y;
         }
     }
 }
