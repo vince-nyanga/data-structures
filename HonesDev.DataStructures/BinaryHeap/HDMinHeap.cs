@@ -59,22 +59,22 @@ namespace HonesDev.DataStructures.BinaryHeap
             }
 
             var item = _items[0];
-            DeleteRoot();
+            ReplaceWithLastItem(0);
             return item;
         }
 
-        private void DeleteRoot()
+        private void ReplaceWithLastItem(int index)
         {
             var i = _items.Count - 1;
-            _items[0] = _items[i];
+            _items[index] = _items[i];
             _items.RemoveAt(i);
 
-            BubbleDown(0);
+            BubbleDown(index);
         }
-
 
         private void BubbleDown(int index)
         {
+
             while (HasLeftChild(index))
             {
                 var leftChildIndex = GetLeftChildIndex(index);
