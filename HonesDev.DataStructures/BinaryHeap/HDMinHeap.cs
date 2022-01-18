@@ -63,6 +63,16 @@ namespace HonesDev.DataStructures.BinaryHeap
             return item;
         }
 
+        public void RemoveAt(int index)
+        {
+            if (index >= _items.Count)
+            {
+                throw new IndexOutOfRangeException();
+            }
+
+            ReplaceWithLastItem(index);
+        }
+
         private void ReplaceWithLastItem(int index)
         {
             var i = _items.Count - 1;
