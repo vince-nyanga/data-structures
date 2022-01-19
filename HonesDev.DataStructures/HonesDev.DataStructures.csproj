@@ -10,11 +10,13 @@
     <None Remove="DoublyLinkedList\BasicImpl\" />
     <None Remove="BinaryTree\" />
     <None Remove="BinaryHeap\" />
+    <None Remove="Graph\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DoublyLinkedList\" />
     <Folder Include="DoublyLinkedList\BasicImpl\" />
     <Folder Include="BinaryTree\" />
     <Folder Include="BinaryHeap\" />
+    <Folder Include="Graph\" />
   </ItemGroup>
 </Project>
