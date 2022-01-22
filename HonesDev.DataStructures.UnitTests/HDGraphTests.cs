@@ -120,6 +120,42 @@ namespace HonesDev.DataStructures.UnitTests
             var result = sut.RemoveVertex(1);
 
             Assert.Equal(0, sut.GetTotalConnections(2));
+            Assert.True(result);
+        }
+
+        [Fact]
+        public void RemoveEdge_InVertexNotExist_ShouldReturnFalse()
+        {
+            HDGraph<int> sut = new();
+
+            var result = sut.RemoveEdge(1, 2);
+
+            Assert.False(result);
+        }
+
+        [Fact]
+        public void RemoveEdge_InEdgeNotExist_ShouldReturnFalse()
+        {
+            HDGraph<int> sut = new();
+            sut.AddVertex(1);
+            sut.AddVertex(2);
+
+            var result = sut.RemoveEdge(1, 2);
+
+            Assert.False(result);
+        }
+
+        [Fact]
+        public void RemoveEdge_ShouldRemoveEdge()
+        {
+            HDGraph<int> sut = new();
+            sut.AddEdge(1, 2);
+
+            var result = sut.RemoveEdge(1, 2);
+
+            Assert.True(result);
+            Assert.Equal(0, sut.GetTotalConnections(1));
+            Assert.Equal(0, sut.GetTotalConnections(2));
         }
     }
 }
