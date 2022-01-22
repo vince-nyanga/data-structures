@@ -52,5 +52,20 @@ namespace HonesDev.DataStructures.Graph
 
         public int Count => _adjacentList.Keys.Count;
 
+        public bool RemoveVertex(T vertex)
+        {
+            if (!_adjacentList.ContainsKey(vertex))
+            {
+                return false;
+            }
+
+            foreach(var connection in _adjacentList[vertex])
+            {
+                _adjacentList[connection].Remove(vertex);
+            }
+
+            _adjacentList.Remove(vertex);
+            return true;
+        }
     }
 }

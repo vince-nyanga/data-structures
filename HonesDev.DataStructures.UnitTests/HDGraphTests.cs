@@ -88,5 +88,38 @@ namespace HonesDev.DataStructures.UnitTests
 
             Assert.True(result);
         }
+
+        [Fact]
+        public void RemoveVertex_ShouldRemoveVertex()
+        {
+            HDGraph<int> sut = new();
+            sut.AddVertex(1);
+
+            var result = sut.RemoveVertex(1);
+
+            Assert.Equal(0, sut.Count);
+            Assert.True(result);
+        }
+
+        [Fact]
+        public void RemoveVertex_IfNotExist_ShouldReturnFalse()
+        {
+            HDGraph<int> sut = new();
+
+            var result = sut.RemoveVertex(1);
+
+            Assert.False(result);
+        }
+
+        [Fact]
+        public void RemoveVertex_IfContainsEdges_ShouldRemoveConnectionsInOtherVertices()
+        {
+            HDGraph<int> sut = new();
+            sut.AddEdge(1, 2);
+
+            var result = sut.RemoveVertex(1);
+
+            Assert.Equal(0, sut.GetTotalConnections(2));
+        }
     }
 }
