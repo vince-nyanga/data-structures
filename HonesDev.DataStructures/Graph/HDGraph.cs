@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 
 namespace HonesDev.DataStructures.Graph
 {
@@ -66,6 +67,77 @@ namespace HonesDev.DataStructures.Graph
 
             _adjacentList.Remove(vertex);
             return true;
+        }
+
+        public bool RemoveEdge(T source, T destination)
+        {
+            if (!_adjacentList.ContainsKey(source) || !_adjacentList[source].Contains(destination))
+            {
+                return false;
+            }
+
+            _adjacentList[source].Remove(destination);
+            _adjacentList[destination].Remove(source);
+
+            return true;
+        }
+
+        public string RunDepthFirstTraversal(T start)
+        {
+            if (!_adjacentList.ContainsKey(start))
+            {
+                return null;
+            }
+
+            StringBuilder stringBuilder = new();
+            Stack<T> stack = new();
+            HashSet<T> visited = new();
+            stack.Push(start);
+
+            while(stack.Count > 0)
+            {
+                var item = stack.Pop();
+                if (!visited.Contains(item))
+                {
+                    visited.Add(item);
+                    stringBuilder.Append($"{item} ");
+                    foreach(var neigbor in _adjacentList[item])
+                    {
+                        stack.Push(neigbor);
+                    }
+                }
+            }
+
+            return stringBuilder.ToString().Trim();
+        }
+
+        public string RunBreadthFirstTraversal(T start)
+        {
+            if (!_adjacentList.ContainsKey(start))
+            {
+                return null;
+            }
+
+            StringBuilder stringBuilder = new();
+            Queue<T> queue = new();
+            HashSet<T> visited = new();
+            queue.Enqueue(start);
+
+            while (queue.Count > 0)
+            {
+                var item = queue.Dequeue();
+                if (!visited.Contains(item))
+                {
+                    visited.Add(item);
+                    stringBuilder.Append($"{item} ");
+                    foreach (var neigbor in _adjacentList[item])
+                    {
+                        queue.Enqueue(neigbor);
+                    }
+                }
+            }
+
+            return stringBuilder.ToString().Trim();
         }
     }
 }

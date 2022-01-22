@@ -157,5 +157,57 @@ namespace HonesDev.DataStructures.UnitTests
             Assert.Equal(0, sut.GetTotalConnections(1));
             Assert.Equal(0, sut.GetTotalConnections(2));
         }
+
+        [Fact]
+        public void RunDepthFirstTraversal_IfStartNotExists_ShouldReturnNull()
+        {
+            HDGraph<int> sut = new();
+
+            var result = sut.RunDepthFirstTraversal(1);
+
+            Assert.Null(result);
+        }
+
+        [Fact]
+        public void RunDepthFirstTraversal_ShouldTraverseGrap()
+        {
+            HDGraph<int> sut = new();
+            sut.AddEdge(1, 2);
+            sut.AddEdge(1, 3);
+            sut.AddEdge(3, 2);
+            sut.AddEdge(2, 4);
+            sut.AddEdge(3, 5);
+            var expected = "1 3 5 2 4";
+
+            var result = sut.RunDepthFirstTraversal(1);
+
+            Assert.Equal(expected, result);
+        }
+
+        [Fact]
+        public void RunBreadthFirstTraversal_IfStartNotExists_ShouldReturnNull()
+        {
+            HDGraph<int> sut = new();
+
+            var result = sut.RunBreadthFirstTraversal(1);
+
+            Assert.Null(result);
+        }
+
+        [Fact]
+        public void RunBreadthFirstTraversal_ShouldTraverseGrap()
+        {
+            HDGraph<int> sut = new();
+            sut.AddEdge(1, 2);
+            sut.AddEdge(1, 3);
+            sut.AddEdge(3, 2);
+            sut.AddEdge(2, 4);
+            sut.AddEdge(3, 5);
+            var expected = "1 2 3 4 5";
+
+            var result = sut.RunBreadthFirstTraversal(1);
+
+            Assert.Equal(expected, result);
+        }
     }
 }
