@@ -56,5 +56,37 @@ namespace HonesDev.DataStructures.UnitTests
             Assert.Equal(1, sut.GetTotalConnections(1));
             Assert.Equal(1, sut.GetTotalConnections(2));
         }
+
+        [Fact]
+        public void HasEdge_WithNotExist_ShouldReturnFalse()
+        {
+            HDGraph<int> sut = new();
+
+            var result = sut.HasEdge(1, 2);
+
+            Assert.False(result);
+        }
+
+        [Fact]
+        public void HasEdge_WhenNoEdge_ShouldReturnFalse()
+        {
+            HDGraph<int> sut = new();
+            sut.AddVertex(1);
+
+            var result = sut.HasEdge(1, 2);
+
+            Assert.False(result);
+        }
+
+        [Fact]
+        public void HasEdge_WhenEdgeExists_ShouldReturnTrue()
+        {
+            HDGraph<int> sut = new();
+            sut.AddEdge(1, 2);
+
+            var result = sut.HasEdge(1, 2);
+
+            Assert.True(result);
+        }
     }
 }

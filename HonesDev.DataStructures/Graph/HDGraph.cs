@@ -40,6 +40,16 @@ namespace HonesDev.DataStructures.Graph
             _adjacentList[destination].Add(source);
         }
 
+        public bool HasEdge(T source, T destination)
+        {
+            if (!_adjacentList.ContainsKey(source))
+            {
+                return false;
+            }
+
+            return _adjacentList[source].Contains(destination);
+        }
+
         public int Count => _adjacentList.Keys.Count;
 
     }
