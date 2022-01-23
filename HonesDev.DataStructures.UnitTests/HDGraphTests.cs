@@ -209,5 +209,57 @@ namespace HonesDev.DataStructures.UnitTests
 
             Assert.Equal(expected, result);
         }
+
+        [Fact]
+        public void HasPath_IfEmpty_ShouldReturnFalse()
+        {
+            HDGraph<int> sut = new();
+
+            var result = sut.HasPath(1, 2);
+
+            Assert.False(result);
+        }
+
+        [Fact]
+        public void HasPath_IfNoPath_ShouldReturnFalse()
+        {
+            HDGraph<int> sut = new();
+            sut.AddVertex(1);
+            sut.AddVertex(2);
+            sut.AddEdge(1, 3);
+            sut.AddEdge(3, 4);
+
+            var result = sut.HasPath(1, 2);
+
+            Assert.False(result);
+        }
+
+        [Fact]
+        public void HasPath_IfPath_ShouldReturnTrue()
+        {
+            HDGraph<int> sut = new();
+            sut.AddVertex(1);
+            sut.AddVertex(2);
+            sut.AddEdge(1, 3);
+            sut.AddEdge(3, 4);
+
+            var result = sut.HasPath(1, 3);
+
+            Assert.True(result);
+        }
+
+        [Fact]
+        public void HasPath_IfSourceAndDestinationSame_ShouldReturnTrue()
+        {
+            HDGraph<int> sut = new();
+            sut.AddVertex(1);
+            sut.AddVertex(2);
+            sut.AddEdge(1, 3);
+            sut.AddEdge(3, 4);
+
+            var result = sut.HasPath(1, 1);
+
+            Assert.True(result);
+        }
     }
 }

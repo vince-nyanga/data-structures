@@ -4,7 +4,7 @@ using System.Text;
 
 namespace HonesDev.DataStructures.Graph
 {
-    public class HDGraph<T>
+    public class HDGraph<T> where T: IComparable
     {
         private readonly Dictionary<T, HashSet<T>> _adjacentList;
 
@@ -96,12 +96,12 @@ namespace HonesDev.DataStructures.Graph
 
             while(stack.Count > 0)
             {
-                var item = stack.Pop();
-                if (!visited.Contains(item))
+                var current = stack.Pop();
+                if (!visited.Contains(current))
                 {
-                    visited.Add(item);
-                    stringBuilder.Append($"{item} ");
-                    foreach(var neigbor in _adjacentList[item])
+                    visited.Add(current);
+                    stringBuilder.Append($"{current} ");
+                    foreach(var neigbor in _adjacentList[current])
                     {
                         stack.Push(neigbor);
                     }
@@ -125,12 +125,12 @@ namespace HonesDev.DataStructures.Graph
 
             while (queue.Count > 0)
             {
-                var item = queue.Dequeue();
-                if (!visited.Contains(item))
+                var current = queue.Dequeue();
+                if (!visited.Contains(current))
                 {
-                    visited.Add(item);
-                    stringBuilder.Append($"{item} ");
-                    foreach (var neigbor in _adjacentList[item])
+                    visited.Add(current);
+                    stringBuilder.Append($"{current} ");
+                    foreach (var neigbor in _adjacentList[current])
                     {
                         queue.Enqueue(neigbor);
                     }
@@ -138,6 +138,36 @@ namespace HonesDev.DataStructures.Graph
             }
 
             return stringBuilder.ToString().Trim();
+        }
+
+        public bool HasPath(T source, T destination)
+        {
+            if (!_adjacentList.ContainsKey(source) || !_adjacentList.ContainsKey(destination))
+            {
+                return false;
+            }
+            Queue<T> queue = new();
+            HashSet<T> visited = new();
+            queue.Enqueue(source);
+
+            while(queue.Count > 0)
+            {
+                var current = queue.Dequeue();
+                if (current.CompareTo(destination)==0)
+                {
+                    return true;
+                }
+
+                if (!visited.Contains(current))
+                {
+                    visited.Add(current);
+                    foreach (var neigbor in _adjacentList[current])
+                    {
+                        queue.Enqueue(neigbor);
+                    }
+                }
+            }
+            return false;
         }
     }
 }
