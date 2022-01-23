@@ -169,5 +169,35 @@ namespace HonesDev.DataStructures.Graph
             }
             return false;
         }
+
+        public int GetShortestPath(T source, T destination)
+        {
+            if (!_adjacentList.ContainsKey(source) || !_adjacentList.ContainsKey(destination))
+            {
+                return -1;
+            }
+            Queue<(T Vertex, int Distance)> queue = new();
+            HashSet<T> visited = new();
+            queue.Enqueue((source, 0));
+
+            while (queue.Count > 0)
+            {
+                var (vertex, distance) = queue.Dequeue();
+                if (vertex.CompareTo(destination) == 0)
+                {
+                    return distance;
+                }
+
+                if (!visited.Contains(vertex))
+                {
+                    visited.Add(vertex);
+                    foreach (var neigbor in _adjacentList[vertex])
+                    {
+                        queue.Enqueue((neigbor, distance + 1));
+                    }
+                }
+            }
+            return -1;
+        }
     }
 }
