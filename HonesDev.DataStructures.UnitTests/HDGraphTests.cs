@@ -261,5 +261,58 @@ namespace HonesDev.DataStructures.UnitTests
 
             Assert.True(result);
         }
+
+        [Fact]
+        public void GetShortestPath_IfEmpty_ShouldReturnFalse()
+        {
+            HDGraph<int> sut = new();
+
+            var result = sut.GetShortestPath(1, 2);
+
+            Assert.Equal(-1, result);
+        }
+
+        [Fact]
+        public void GetShortestPath_IfNoPath_ShouldReturnFalse()
+        {
+            HDGraph<int> sut = new();
+            sut.AddVertex(1);
+            sut.AddVertex(2);
+            sut.AddEdge(1, 3);
+            sut.AddEdge(3, 4);
+
+            var result = sut.GetShortestPath(1, 2);
+
+            Assert.Equal(-1, result);
+        }
+
+        [Fact]
+        public void GetShortestPath_IfPath_ShouldReturnDistance()
+        {
+            HDGraph<int> sut = new();
+            sut.AddEdge(1, 2);
+            sut.AddEdge(1, 3);
+            sut.AddEdge(3, 2);
+            sut.AddEdge(2, 4);
+            sut.AddEdge(3, 5);
+
+            var result = sut.GetShortestPath(1, 3);
+
+            Assert.Equal(1, result);
+        }
+
+        [Fact]
+        public void GetShortestPath_IfSourceAndDestinationSame_ShouldReturnZero()
+        {
+            HDGraph<int> sut = new();
+            sut.AddVertex(1);
+            sut.AddVertex(2);
+            sut.AddEdge(1, 3);
+            sut.AddEdge(3, 4);
+
+            var result = sut.GetShortestPath(1, 1);
+
+            Assert.Equal(0, result);
+        }
     }
 }
