@@ -199,5 +199,36 @@ namespace HonesDev.DataStructures.Graph
             }
             return -1;
         }
+
+        public int GetTotalConnectedComponents()
+        {
+            int count = 0;
+            HashSet<T> visited = new();
+            foreach(var vertex in _adjacentList.Keys)
+            {
+                if (Traverse(vertex, ref visited))
+                {
+                    count++;
+                }
+            }
+            return count;
+        }
+
+        private bool Traverse(T vertex, ref HashSet<T> visited)
+        {
+            if (visited.Contains(vertex))
+            {
+                return false;
+            }
+
+            visited.Add(vertex);
+
+            foreach (var neighbor in _adjacentList[vertex])
+            {
+                Traverse(neighbor, ref visited);
+            }
+
+            return true;
+        }
     }
 }

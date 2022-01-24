@@ -314,5 +314,29 @@ namespace HonesDev.DataStructures.UnitTests
 
             Assert.Equal(0, result);
         }
+
+        [Fact]
+        public void GetTotalConnectedComponents_IfEmpty_ShouldReturnZero()
+        {
+            HDGraph<int> sut = new();
+
+            var result = sut.GetTotalConnectedComponents();
+
+            Assert.Equal(0, result);
+        }
+
+        [Fact]
+        public void GetTotalConnectedComponents_ShouldReturnTotalComponents()
+        {
+            HDGraph<int> sut = new();
+            sut.AddEdge(1, 2);
+            sut.AddEdge(2, 3);
+            sut.AddEdge(4, 5);
+            sut.AddVertex(6);
+
+            var result = sut.GetTotalConnectedComponents();
+
+            Assert.Equal(3, result);
+        }
     }
 }
