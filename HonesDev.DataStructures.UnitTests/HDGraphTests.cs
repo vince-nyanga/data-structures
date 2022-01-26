@@ -338,5 +338,29 @@ namespace HonesDev.DataStructures.UnitTests
 
             Assert.Equal(3, result);
         }
+
+        [Fact]
+        public void GetLargestComponentSize_IfEmpty_ShouldReturnZero()
+        {
+            HDGraph<int> sut = new();
+
+            var result = sut.GetLargestComponentSize();
+
+            Assert.Equal(0, result);
+        }
+
+        [Fact]
+        public void GetLargestComponentSize_ShouldReturnSize()
+        {
+            HDGraph<int> sut = new();
+            sut.AddEdge(1, 2);
+            sut.AddEdge(2, 3);
+            sut.AddEdge(4, 5);
+            sut.AddVertex(6);
+
+            var result = sut.GetLargestComponentSize();
+
+            Assert.Equal(3, result);
+        }
     }
 }
