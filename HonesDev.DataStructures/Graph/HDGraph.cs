@@ -230,5 +230,43 @@ namespace HonesDev.DataStructures.Graph
 
             return true;
         }
+
+        public int GetLargestComponentSize()
+        {
+            HashSet<T> visited = new();
+            if (_adjacentList.Count == 0)
+            {
+                return 0;
+            }
+            var largestSize = 0;
+            foreach(var vertex in _adjacentList.Keys)
+            {
+                var size = GetComponentSize(vertex, ref visited);
+                if (size > largestSize)
+                {
+                    largestSize = size;
+                }
+            }
+
+            return largestSize;
+        }
+
+        private int GetComponentSize(T vertex, ref HashSet<T> visited)
+        {
+            if (visited.Contains(vertex))
+            {
+                return int.MinValue;
+            }
+
+            var componentSize = 1;
+            visited.Add(vertex);
+
+            foreach(var neighbor in _adjacentList[vertex])
+            {
+                componentSize += GetComponentSize(neighbor, ref visited);
+            }
+
+            return componentSize;
+        }
     }
 }
